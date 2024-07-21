@@ -9,29 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var playerCard = "card7"
-    var cpuCard = "card8"
+    @State var playerCard = "card7"
+    @State var cpuCard = "card8"
     
-    var playerScore = 0
-    var cpuScore = 0
+    @State var playerScore = 0
+    @State var cpuScore = 0
     
     var body: some View {
-        
-
         VStack {
             Image("logo")
             Spacer()
             
             HStack {
-                
                 Image(playerCard)
                 Spacer()
                 Image(cpuCard)
             }
-            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .padding(/*@START_MENU_TOKEN@*/ .all/*@END_MENU_TOKEN@*/)
             Spacer()
                 
-            Button{ 
+            Button {
                 deal()
             }
             label: {
@@ -39,10 +36,10 @@ struct ContentView: View {
             }
             Spacer()
             
-            HStack() {
+            HStack {
                 VStack {
                     Text("Player")
-                        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                        .padding(/*@START_MENU_TOKEN@*/ .all/*@END_MENU_TOKEN@*/)
                         
                     Text("\(playerScore)")
                 }.font(.title)
@@ -51,20 +48,35 @@ struct ContentView: View {
                 Spacer()
                 VStack {
                     Text("CPU")
-                        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                        .padding(/*@START_MENU_TOKEN@*/ .all/*@END_MENU_TOKEN@*/)
                     Text("\(cpuScore)")
                 }.font(.title)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.trailing)
             }
-            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .padding(/*@START_MENU_TOKEN@*/ .all/*@END_MENU_TOKEN@*/)
                         
         }.background(Image("background-plain"))
             .padding()
     }
     
-    func deal () {
-        print("ASD")
+    func deal() {
+        var num = Int.random(in:2...14)
+        playerCard = "card" + String(num)
+        print(playerCard)
+        
+        
+        var cpu_num = Int.random(in:2...14)
+        cpuCard = "card" + String(cpu_num)
+        print(cpuCard)
+        
+        if cpu_num > num {
+            cpuScore+=1
+        }
+        else if cpu_num < num {
+            playerScore+=1
+        }
+
     }
 }
  
